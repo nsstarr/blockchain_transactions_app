@@ -1,4 +1,5 @@
 const axios = require('axios');
+const cors = require('cors');
 const express = require('express');
 require('dotenv').config();
 const app = express();
@@ -7,6 +8,10 @@ const PORT = 3000;
 // Define a data structure to store the transactions
 let transactions = [];
 
+// Enable CORS
+app.use(cors());
+
+// Define a route to retrieve the transactions
 app.get('/api/transactions', async (req, res) => {
   try {
     //Retrieve the filter parameters from the request query string
@@ -31,8 +36,6 @@ app.get('/api/transactions', async (req, res) => {
 
     // Store the transactions in memory
     transactions = response.data.result;
-
-    console.log(transactions)
 
     // Apply filters
     let filteredTransactions = transactions;
