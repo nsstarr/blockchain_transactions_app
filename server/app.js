@@ -33,10 +33,8 @@ app.get('/api/transactions', async (req, res) => {
       },
     });
 
-
     // Store the transactions in memory
     transactions = response.data.result;
-
 
     // Apply filters
     let filteredTransactions = transactions;
@@ -67,12 +65,19 @@ app.get('/api/transactions', async (req, res) => {
       filteredTransactions = filteredTransactions.slice(+offset);
     }
     res.json(filteredTransactions);
+
+    //Handle errors
+    if (response.data.status === '0') {
+      console.log(response.data.status);
+      return { status: 404, message: response.data.result };
+    } else {
+      return { status: 200, message: response.data };
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred' });
   }
 });
-
 
 app.listen(PORT, error => {
   if (!error)

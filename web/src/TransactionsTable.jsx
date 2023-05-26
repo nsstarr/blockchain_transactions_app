@@ -105,7 +105,7 @@ const TransactionsTable = () => {
         </thead>
         <tbody>
           {transactions.map((transaction, index) => (
-            <tr key={transaction.hash || index}>
+            <tr key={index}>
               <td>{transaction.from}</td>
               <td>{transaction.to}</td>
               <td>{transaction.value}</td>
