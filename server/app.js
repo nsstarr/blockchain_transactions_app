@@ -37,6 +37,7 @@ app.get('/api/transactions', async (req, res) => {
     // Store the transactions in memory
     transactions = response.data.result;
 
+
     // Apply filters
     let filteredTransactions = transactions;
     if (fromAddress) {
@@ -51,19 +52,19 @@ app.get('/api/transactions', async (req, res) => {
     }
     if (aboveValue) {
       filteredTransactions = filteredTransactions.filter(
-        tx => tx.value > aboveValue,
+        tx => +tx.value > +aboveValue,
       );
     }
     if (belowValue) {
       filteredTransactions = filteredTransactions.filter(
-        tx => tx.value < belowValue,
+        tx => +tx.value < +belowValue,
       );
     }
     if (limit) {
-      filteredTransactions = filteredTransactions.slice(0, limit);
+      filteredTransactions = filteredTransactions.slice(0, +limit);
     }
     if (offset) {
-      filteredTransactions = filteredTransactions.slice(offset);
+      filteredTransactions = filteredTransactions.slice(+offset);
     }
     res.json(filteredTransactions);
   } catch (error) {
