@@ -7,11 +7,12 @@ const transactionsRouter = require('./routes/transactions');
 const app = express();
 const PORT = 3000;
 
+// Enable CORS
+app.use(cors());
+
 // Use the transactions router as middleware
 app.use('/api/transactions', transactionsRouter);
 
-// Enable CORS
-app.use(cors());
 
 app.get('/', function (req, res) {
   res.json({

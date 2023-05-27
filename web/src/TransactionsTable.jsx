@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
@@ -11,6 +12,7 @@ const TransactionsTable = () => {
     limit: '',
     offset: '',
   });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     fetchData();
@@ -29,6 +31,19 @@ const TransactionsTable = () => {
       console.error(error);
     }
   };
+  //Validate inputs of aboveValue and belowValue filters
+  const validateInputs = () => {
+    const newErrors = {};
+    if (filters.aboveValue && isNaN(filters.aboveValue)) {
+      newErrors.aboveValue = 'Value must be a number';
+    }
+    if (filters.belowValue && isNaN(filters.belowValue)) {
+      newErrors.belowValue = 'Value must be a number';
+    }
+    setErrors(newErrors);
+    //The function checks if the newErrors object is empty by getting its keys using Object.keys and checking if the length of the keys array is 0. 
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleFilterChange = e => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -36,7 +51,9 @@ const TransactionsTable = () => {
 
   const handleFilterSubmit = e => {
     e.preventDefault();
-    fetchData();
+    if (validateInputs()) {
+      fetchData();
+    }
   };
 
   return (
@@ -62,20 +79,21 @@ const TransactionsTable = () => {
 
         <label>Above Value:</label>
         <input
-          type='number'
+          type='text'
           name='aboveValue'
           value={filters.aboveValue}
           onChange={handleFilterChange}
         />
+        {errors.aboveValue && <p>{errors.aboveValue}</p>}
 
         <label>Below Value:</label>
         <input
-          type='number'
+          type='text'
           name='belowValue'
           value={filters.belowValue}
           onChange={handleFilterChange}
         />
-
+        {errors.belowValue && <p>{errors.belowValue}</p>}
         <label>Limit:</label>
         <input
           type='number'
