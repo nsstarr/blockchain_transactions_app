@@ -28,6 +28,12 @@ router.get('/', async (req, res) => {
       },
     });
 
+    if (response.data.status === '0') {
+      // Handle API error
+      console.error(response.data.result);
+      return res.status(404).json({ error: response.data.result });
+    }
+
     // Store the transactions in memory
     transactions = response.data.result;
 
