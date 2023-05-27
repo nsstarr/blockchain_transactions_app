@@ -2,6 +2,9 @@ import './index.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
+//component imports
+import Navbar from './components/Navbar'
+
 const TransactionsTable = () => {
   const [transactions, setTransactions] = useState([]);
   const [filters, setFilters] = useState({
@@ -58,26 +61,19 @@ const TransactionsTable = () => {
 
   return (
     <>
-      <img
-        src='../public/logo-white.png'
-        alt='Company Logo'
-        className='h-8 my-3 m-4 p-1'
-      />
-      <div className='font-display text-primary container mx-10 flex flex-col'>
-        <h1 className='text-4xl tracking-tight font-bold text-primary my-10'>
+      <Navbar />
+      <div className='font-display text-primary mx-28 flex flex-col'>
+        <h1 className='text-4xl tracking-tight font-bold text-center hover:underline text-primary my-10'>
           Blockchain Transactions
         </h1>
 
-        <form
-          onSubmit={handleFilterSubmit}
-          className='border-gray border-2 p-8 rounded-lg'
-        >
+        <form onSubmit={handleFilterSubmit} className=' p-8 rounded-lg'>
           <div
             className='flex justify-around
         '
           >
             <div className='flex items-center mb-3 flex-col'>
-              <p className='text-lg font-bold text-secondary my-3'>
+              <p className='text-lg font-semibold text-primary my-3 tracking-tight'>
                 Contract Address Information
               </p>
               <label className='text-md font-medium mb-2'>From Address:</label>
@@ -98,7 +94,7 @@ const TransactionsTable = () => {
               />
             </div>
             <div className='flex flex-col items-center mb-3'>
-              <p className='text-lg font-bold text-secondary my-3'>
+              <p className='text-lg font-semibold text-primary my-3 tracking-tight'>
                 Contract Address Value
               </p>
               <label className='text-md font-medium mb-2'>Above Value:</label>
@@ -122,7 +118,7 @@ const TransactionsTable = () => {
               {errors.belowValue && <p>{errors.belowValue}</p>}
             </div>
             <div className='flex flex-col items-center'>
-              <p className='text-lg font-bold text-secondary my-3'>
+              <p className='text-lg font-semibold text-primary my-3 tracking-tight'>
                 Page Display
               </p>
               <label className='text-md font-medium mb-2'>Limit:</label>
@@ -131,7 +127,7 @@ const TransactionsTable = () => {
                 name='limit'
                 value={filters.limit}
                 onChange={handleFilterChange}
-                className='m-1 p-1 border border-gray rounded-lg'
+                className='m-1 p-1 border border-gray rounded-lg bg-none'
               />
               <label className='text-md font-medium mb-2'>Offset:</label>
               <input
@@ -144,32 +140,38 @@ const TransactionsTable = () => {
             </div>
           </div>
           <div className='flex justify-center'>
-          <button
-            className='bg-button hover:opacity-80 font-semibold text-white px-8 py-2 rounded-lg mt-4 hover:bg-primary-dark'
-            type='submit'
-          >
-            Apply Filters
-          </button>
+            <button
+              className='bg-button hover:opacity-80 font-semibold text-white px-8 py-2 rounded-lg mt-4 hover:bg-primary-dark'
+              type='submit'
+            >
+              Apply Filters
+            </button>
           </div>
         </form>
         <table className='border-2 border-gray mt-10'>
-          <thead className=''>
-            <tr className='text-secondary'>
-              <th className='text-lg py-2 px-4 md:px-6 lg:px-8'>From</th>
-              <th className='text-lg py-2 px-4 md:px-6 lg:px-8'>To</th>
-              <th className='text-lg py-2 px-4 md:px-6 lg:px-8'>Value</th>
+          <thead className='border-2 border-gray border-1.5'>
+            <tr className='text-primary tracking-tight '>
+              <th className='text-lg py-2 px-4 border-2 border-gray md:px-6 lg:px-8'>
+                From
+              </th>
+              <th className='text-lg py-2 px-4 border-2 border-gray md:px-6 lg:px-8'>
+                To
+              </th>
+              <th className='text-lg py-2 px-4 border-2 border-gray md:px-6 lg:px-8'>
+                Value
+              </th>
             </tr>
           </thead>
           <tbody>
             {transactions.map((transaction, index) => (
               <tr key={index}>
-                <td className='text-center py-2 px-4 md:px-6 lg:px-8 text-sm'>
+                <td className='border-2 border-gray text-center py-2 px-4 md:px-6 lg:px-8 text-sm'>
                   {transaction.from}
                 </td>
-                <td className='text-center py-2 px-4 md:px-6 lg:px-8 text-sm'>
+                <td className='border-2 border-gray text-center py-2 px-4 md:px-6 lg:px-8 text-sm'>
                   {transaction.to}
                 </td>
-                <td className='text-center py-2 px-4 md:px-6 lg:px-8 text-sm'>
+                <td className=' border-2 border-gray text-center py-2 px-4 md:px-6 lg:px-8 text-sm'>
                   {transaction.value}
                 </td>
               </tr>
