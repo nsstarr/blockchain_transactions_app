@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+import './index.css'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
@@ -58,7 +58,7 @@ const TransactionsTable = () => {
 
   return (
     <div>
-      <h1>Blockchain Transactions</h1>
+      <h1 className='text-red-400'>Blockchain Transactions</h1>
 
       <form onSubmit={handleFilterSubmit}>
         <label>From Address:</label>
