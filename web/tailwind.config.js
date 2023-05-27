@@ -7,6 +7,8 @@ export default {
       },
       colors: {
         primary: '#1B144C',
+        secondary: '#3C2F77',
+        highlight: '#F2647D',
         button: '#301934',
         white: '#FFFFFF',
         gray: '#808080',
