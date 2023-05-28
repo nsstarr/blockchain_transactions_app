@@ -83,18 +83,20 @@ const TransactionsTable = () => {
               <p className='text-lg font-semibold text-primary my-3 tracking-tight'>
                 Contract Address Information
               </p>
-              <label className='text-md font-medium mb-2'>From Address:</label>
+              <label htmlFor='fromAddress' className='text-md font-medium mb-2'>From Address:</label>
               <input
                 type='text'
                 name='fromAddress'
+                id='fromAddress'
                 value={filters.fromAddress}
                 onChange={handleFilterChange}
                 className='m-1 p-1 border border-gray rounded-lg'
               />
-              <label className='text-md font-medium mb-2 '>To Address:</label>
+              <label htmlFor='toAddress' className='text-md font-medium mb-2 '>To Address:</label>
               <input
                 type='text'
                 name='toAddress'
+                id='toAddress'
                 value={filters.toAddress}
                 onChange={handleFilterChange}
                 className='m-1 p-1 border border-gray rounded-lg'
@@ -104,19 +106,21 @@ const TransactionsTable = () => {
               <p className='text-lg font-semibold text-primary my-3 tracking-tight'>
                 Contract Address Value
               </p>
-              <label className='text-md font-medium mb-2'>Above Value:</label>
+              <label htmlFor='aboveValue' className='text-md font-medium mb-2'>Above Value:</label>
               <input
                 type='text'
                 name='aboveValue'
+                id='aboveValue'
                 value={filters.aboveValue}
                 onChange={handleFilterChange}
                 className='m-1 p-1 border border-gray rounded-lg'
               />
               {errors.aboveValue && <p>{errors.aboveValue}</p>}
 
-              <label className='text-md font-medium mb-2'>Below Value:</label>
+              <label htmlFor='belowValue' className='text-md font-medium mb-2'>Below Value:</label>
               <input
                 type='text'
+                id='belowValue'
                 name='belowValue'
                 value={filters.belowValue}
                 onChange={handleFilterChange}
@@ -128,17 +132,19 @@ const TransactionsTable = () => {
               <p className='text-lg font-semibold text-primary my-3 tracking-tight'>
                 Page Display
               </p>
-              <label className='text-md font-medium mb-2'>Limit:</label>
+              <label htmlFor='limit' className='text-md font-medium mb-2'>Limit:</label>
               <input
                 type='number'
+                id='limit'
                 name='limit'
                 value={filters.limit}
                 onChange={handleFilterChange}
                 className='m-1 p-1 border border-gray rounded-lg bg-none'
               />
-              <label className='text-md font-medium mb-2'>Offset:</label>
+              <label htmlFor='offset' className='text-md font-medium mb-2'>Offset:</label>
               <input
                 type='number'
+                id='offset'
                 name='offset'
                 value={filters.offset}
                 onChange={handleFilterChange}
