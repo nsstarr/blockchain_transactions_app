@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 //component imports
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar';
+import ClearCacheButton from './components/ClearCacheButton';
 
 const TransactionsTable = () => {
   const [transactions, setTransactions] = useState([]);
@@ -18,7 +19,12 @@ const TransactionsTable = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    fetchData();
+    const cachedTransactions = localStorage.getItem('transactions');
+    if (cachedTransactions) {
+      setTransactions(JSON.parse(cachedTransactions));
+    } else {
+      fetchData(); // Fetch transactions if not found in cache
+    }
   }, []);
 
   const fetchData = async () => {
@@ -30,6 +36,7 @@ const TransactionsTable = () => {
         },
       );
       setTransactions(response.data);
+      localStorage.setItem('transactions', JSON.stringify(response.data));
     } catch (error) {
       console.error(error);
     }
@@ -139,16 +146,17 @@ const TransactionsTable = () => {
               />
             </div>
           </div>
-          <div className='flex justify-center'>
+          <div className='flex justify-center space-x-2'>
             <button
-              className='bg-button hover:opacity-80 font-semibold text-white px-8 py-2 rounded-lg mt-4 hover:bg-primary-dark'
+              className='bg-button hover:opacity-80 font-medium text-white px-8 py-2 rounded-lg mt-4 hover:bg-primary-dark tracking-tighter'
               type='submit'
             >
               Apply Filters
             </button>
+            <ClearCacheButton/>
           </div>
         </form>
-        <table className='border-2 border-gray mt-10'>
+        <table className='border-2 border-gray mt-10 bg-white mb-10'>
           <thead className='border-2 border-gray border-1.5'>
             <tr className='text-primary tracking-tight '>
               <th className='text-lg py-2 px-4 border-2 border-gray md:px-6 lg:px-8'>

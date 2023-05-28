@@ -29,3 +29,6 @@
     a) save received trasactions to a state
     b) console.log the error if something goes wrong
 8. Map through the array of transactions to display them in the table
+9. Style the App with TailwindCSS
+    a) add all the relevant colours to the app's theme in the tailwind.config file
+10. Implement pagination
