@@ -28,7 +28,9 @@ router.get('/', async (req, res) => {
       },
     });
 
-    if (response.data.status === '0') {
+    console.log(response.data.status)
+
+    if (response.data.status === '0' || response.data.status === 0) {
       // Handle API error
       console.error(response.data.result);
       return res.status(404).json({ error: response.data.result });
@@ -69,8 +71,8 @@ router.get('/', async (req, res) => {
 
     //Handle errors
     if (response.data.status === '0') {
-      console.log(response.data.status);
-      return { status: 404, message: response.data.result };
+         console.error(response.data.result);
+         return res.status(404).json({ error: response.data.result });
     } else {
       return { status: 200, message: response.data };
     }
