@@ -32,3 +32,15 @@
 9. Style the App with TailwindCSS
     a) add all the relevant colours to the app's theme in the tailwind.config file
 10. Implement pagination
+
+## Testing
+
+1. Test the API with Supertest
+    a) Make sure that the API call to Etherscan returns a list of transactions.
+    b) Test the error handling.
+    c) Test the filters
+2. Test the Frotend
+    a) UI Components: Testing the individual UI components in isolation.
+    b) Data Loading
+    c) Form Validation
+    d) Error Handling: Testing how your app handles errors.
