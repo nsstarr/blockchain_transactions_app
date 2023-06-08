@@ -4,6 +4,8 @@ import TransactionsTable from '../TransactionsTable';
 
 describe('<TransactionsTable />', () => {
   test('Component mounts properly', () => {
+    
+    //Verify that the whole component renders
     const wrapper = render(<TransactionsTable />);
     expect(wrapper).toBeTruthy();
 
