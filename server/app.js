@@ -7,12 +7,9 @@ const transactionsRouter = require('./routes/transactions');
 const app = express();
 const PORT = 3000;
 
-// Enable CORS
 app.use(cors());
 
-// Use the transactions router as middleware
 app.use('/api/transactions', transactionsRouter);
-
 
 app.get('/', function (req, res) {
   res.json({
@@ -20,7 +17,6 @@ app.get('/', function (req, res) {
     message: 'Test route up and running!',
   });
 });
-
 
 app.listen(PORT, error => {
   if (!error)

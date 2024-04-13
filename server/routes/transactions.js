@@ -26,39 +26,37 @@ router.get('/', async (req, res) => {
     transactions = response.data.result;
 
     let filteredTransactions = transactions;
-  
-      function checkFilters (transactions) {
-      let passFilters = true
+
+    function checkFilters(transactions) {
+      let passFilters = true;
       if (fromAddress) {
-       if (transactions.from !== fromAddress) {
-        passFilters = false
-       }
-      } 
+        if (transactions.from !== fromAddress) {
+          passFilters = false;
+        }
+      }
       if (toAddress) {
         if (transactions.to !== toAddress) {
-        passFilters = false
-       }
+          passFilters = false;
+        }
       }
       if (aboveValue) {
-       if (transactions.aboveValue < +aboveValue) {
-        passFilters = false
-       }
+        if (transactions.aboveValue < +aboveValue) {
+          passFilters = false;
+        }
       }
       if (belowValue) {
-       if (transactions.aboveValue > +aboveValue){
-        passFilters = false
-       }
+        if (transactions.aboveValue > +aboveValue) {
+          passFilters = false;
+        }
       }
-      return passFilters
-      }
+      return passFilters;
+    }
 
-    filteredTransactions = transactions.filter(checkFilters)
+    filteredTransactions = transactions.filter(checkFilters);
 
-    filteredTransactions = filteredTransactions.slice(0, +limit)
+    filteredTransactions = filteredTransactions.slice(0, +limit);
 
-    filteredTransactions = filteredTransactions.slice(+offset)
-
-
+    filteredTransactions = filteredTransactions.slice(+offset);
 
     if (fromAddress) {
       filteredTransactions = filteredTransactions.filter(
