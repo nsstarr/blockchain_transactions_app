@@ -2,17 +2,12 @@ const axios = require('axios');
 const express = require('express');
 const router = express.Router();
 
-// Define a route to retrieve the transactions
 router.get('/', async (req, res) => {
-  // Define a data structure to store the transactions
   let transactions = [];
 
-  // Handle the GET request for transactions
   try {
-    //Retrieve the filter parameters from the request query string
     const { fromAddress, toAddress, aboveValue, belowValue, limit, offset } =
       req.query;
-    // Define the Etherscan API URL and retrieve the API key from environment variables
     const apiUrl = 'https://api.etherscan.io/api';
     const apiKey = process.env.ETHERSCAN_API_KEY;
 
@@ -28,10 +23,8 @@ router.get('/', async (req, res) => {
       },
     });
 
-    // Store the transactions in memory
     transactions = response.data.result;
 
-    // Apply filters
     let filteredTransactions = transactions;
   
       function checkFilters (transactions) {
@@ -59,7 +52,7 @@ router.get('/', async (req, res) => {
       return passFilters
       }
 
-    let filteredTransactions = transactions.filter(checkFilters)
+    filteredTransactions = transactions.filter(checkFilters)
 
     filteredTransactions = filteredTransactions.slice(0, +limit)
 
